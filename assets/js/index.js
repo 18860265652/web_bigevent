@@ -124,7 +124,7 @@ function renderAvatar(user){
  $('#welcome').html('欢迎&nbsp;&nbsp;' + name)
   if(user.user_pic !== null){
     $('.layui-nav-img').attr('src',user.user_pic).show();
-    $('text-avatar').hide();
+    $('.text-avatar').hide();
     
   }else{
     var name = user.username[0].toUpperCase();
