@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // $(function() {
 //   // 点击“去注册账号”的链接
 //   $('#link_reg').on('click', function() {
@@ -75,6 +76,12 @@
 $(function(){
 
 
+=======
+
+$(function(){
+
+
+>>>>>>> index
   $('#link_reg').on('click',function(){
       $('.login-box').hide();
       $('.reg-box').show();
