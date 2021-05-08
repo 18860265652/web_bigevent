@@ -24,10 +24,12 @@ $(function(){
   repwd:function(value){
    
   //  $pwd = $('.reg-box [name=repassward]').val();
-  var pwd = $('.reg-box').children('.layui-input:nth-child(2)').val();
-  // var pwd = $('.reg-box [name=password]').val()
+  // var pwd = $('.reg-box').children('.layui-input:nth-child(2)').val();
+  var pwd = $('.reg-box [name=password]').val()
    if (pwd !== value) {
+     layui.layer.msg('两次密码必须相同');
   }
+  
   }
 
  
@@ -58,28 +60,25 @@ $(function(){
 })
   
 
-$('#form_login').on('submit',function(e){
-  e.preventDefault();
+$('#form_login').submit(function(e) {
+  // 阻止默认提交行为
+  e.preventDefault()
   $.ajax({
-    type: "post",
-    url: "/api/login",
-    // 快速获取表单数据
-    data:$(this).serialize(),
-    // dataType: "dataType",
-    success: function (data) {
-      console.log(data.token);
-
-      layer.msg(data.message);
-      if(data.status == 0){
-        // 将登录成功得到 token 字符串,保存到localStorge中
-        localStorage.setItem('token',data.token)
-        //跳转到后台主页
-        location.href="/index.html";
-
+    url: '/api/login',
+    method: 'POST',
+    // 快速获取表单中的数据
+    data: $(this).serialize(),
+    success: function(res) {
+      if (res.status !== 0) {
+        return layer.msg('登录失败！')
       }
-      
+      layer.msg('登录成功！')
+      // 将登录成功得到的 token 字符串，保存到 localStorage 中
+      localStorage.setItem('token', res.token)
+      // 跳转到后台主页
+      location.href = '/index.html'
     }
-  });
+  })
 })
 
 
